@@ -24,8 +24,29 @@ function mergeLinked(l1:SingleLinkedNode<number>, l2:SingleLinkedNode<number>):S
 
   return null;
 }
-//    1   3  3       6
-// 1           4 5 6
+
+// 方法二 迭代
+function mergeLinked1(l1:SingleLinkedNode<number>, l2:SingleLinkedNode<number>):SingleLinkedNode<number> {
+  let tempL1 = l1;
+  let tempL2 = l2;
+  const newL = new SingleLinkedList<number>();
+  while (tempL1 && tempL2) {
+    if (tempL1.value <= tempL2.value) {
+      newL.appendNode(tempL1);
+      tempL1 = tempL1.next;
+    } else if (tempL2.value <= tempL1.value) {
+      newL.appendNode(tempL2);
+      tempL2 = tempL2.next;
+    }
+  }
+  if (!tempL1) {
+    newL.appendNode(tempL2);
+  }
+  if (!tempL2) {
+    newL.appendNode(tempL1);
+  }
+  return newL.head;
+}
 
 function main() {
   const l1 = new SingleLinkedList<number>();
@@ -39,7 +60,8 @@ function main() {
   l2.append(5);
   l2.append(6);
 
-  console.info(mergeLinked(l1.head, l2.head).list());
+  console.info(mergeLinked1(l1.head, l2.head).list());
+//   console.info(mergeLinked(l1.head, l2.head).list());
 }
 
 main();

@@ -48,6 +48,17 @@ export class SingleLinkedList<T> {
       return newNode;
     }
 
+    appendNode(newNode:SingleLinkedNode<T>) {
+      if (!this.head) {
+        this.head = newNode;
+      } else {
+        this.tail.next = newNode;
+      }
+      this.tail = newNode;
+      this.length++;
+      return newNode;
+    }
+
     // 时间复制度  O(1)
     prepend(value:T) {
       const newNode = new SingleLinkedNode(value);
