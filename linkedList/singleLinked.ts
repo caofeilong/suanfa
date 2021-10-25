@@ -2,20 +2,30 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable max-classes-per-file */
-class SingleLinkedNode {
-    value:string
+export class SingleLinkedNode<T> {
+    value:T
 
-    next: SingleLinkedNode
+    next: SingleLinkedNode<T>
 
-    constructor(value:string) {
+    constructor(value:T) {
       this.value = value;
+    }
+
+    list():Array<T> {
+      const rValue:Array<T> = [this.value];
+      let tempValue = this as SingleLinkedNode<T>;
+      while (tempValue.next != null) {
+        tempValue = tempValue.next;
+        rValue.push(tempValue.value);
+      }
+      return rValue;
     }
 }
 
-class SingleLinkedList {
-    head:SingleLinkedNode
+export class SingleLinkedList<T> {
+    head:SingleLinkedNode<T>
 
-    tail:SingleLinkedNode
+    tail:SingleLinkedNode<T>
 
     length: number=0
 
@@ -25,7 +35,7 @@ class SingleLinkedList {
     }
 
     //  时间复制度  O(1)
-    append(value:string) {
+    append(value:T) {
       const newNode = new SingleLinkedNode(value);
       if (!this.head) {
         this.head = newNode;
@@ -39,7 +49,7 @@ class SingleLinkedList {
     }
 
     // 时间复制度  O(1)
-    prepend(value:string) {
+    prepend(value:T) {
       const newNode = new SingleLinkedNode(value);
       if (!this.tail) {
         this.tail = newNode;
@@ -63,7 +73,7 @@ class SingleLinkedList {
     }
 
     // 时间复杂度是 O(1)
-    insertNodeAfter(preNode:SingleLinkedNode, value:string):SingleLinkedNode {
+    insertNodeAfter(preNode:SingleLinkedNode<T>, value:T):SingleLinkedNode<T> {
       if (preNode === this.tail) {
         return this.append(value);
       }
@@ -75,7 +85,7 @@ class SingleLinkedList {
     }
 
     // 时间复杂度是 O(N)
-    remoteByNode(rmNode:SingleLinkedNode) {
+    remoteByNode(rmNode:SingleLinkedNode<T>) {
       if (rmNode === this.tail) {
         this.pop();
         return;
@@ -102,17 +112,17 @@ class SingleLinkedList {
     }
 }
 
-function main() {
-  const list = new SingleLinkedList();
-  //   const cflNode =
-  list.append('cfl');
-  list.append('swk');
-  list.append('lgl');
-  console.info(list);
-  // list.pop();
-  // console.info(list);
+// function main() {
+//   const list = new SingleLinkedList<string>();
+//   //   const cflNode =
+//   list.append('cfl');
+//   list.append('swk');
+//   list.append('lgl');
+//   console.info(list);
+//   // list.pop();
+//   // console.info(list);
 
-  // console.info(list.getByIndex(1));
-}
+//   // console.info(list.getByIndex(1));
+// }
 
-main();
+// main();
