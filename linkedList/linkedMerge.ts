@@ -61,7 +61,7 @@ function main() {
   l2.append(6);
 
   console.info(mergeLinked1(l1.head, l2.head).list());
-//   console.info(mergeLinked(l1.head, l2.head).list());
+  console.info(mergeLinked(l1.head, l2.head).list());
 }
 
 main();
