@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-param-reassign */
 // 删除有序重复链表
 import { SingleLinkedNode, SingleLinkedList } from './singleLinked';
