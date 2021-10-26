@@ -7,7 +7,7 @@ export class SingleLinkedNode<T> {
 
     next: SingleLinkedNode<T>
 
-    constructor(value:T) {
+    constructor(value?:T) {
       this.value = value;
     }
 
@@ -120,6 +120,26 @@ export class SingleLinkedList<T> {
         tempIndex++;
       }
       return tempValue.value;
+    }
+
+    // 删除所有value 的节点
+    deleteNodeByValue(value:T) {
+      const temp = new SingleLinkedNode<T>();
+      temp.next = this.head;
+
+      let temp1 = temp;
+      while (temp1 && temp1.next) {
+        if (temp1.next.value === value) {
+          if (temp1.next === this.tail) {
+            this.tail = temp1;
+          }
+          temp1.next = temp1.next.next;
+          --this.length;
+        } else {
+          temp1 = temp1.next;
+        }
+      }
+      this.head = temp.next;
     }
 }
 
